@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=3 uid="uid://yerkrcfrgdlg"]
+
+[ext_resource type="Script" uid="uid://cmxnpfegi65lj" path="res://card.gd" id="1_kikvd"]
+[ext_resource type="Texture2D" uid="uid://kscoe7d1bmum" path="res://sprites/cards/spades/Ace-Sheet.png" id="2_rjlel"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nsakb"]
+size = Vector2(17, 30)
+
+[node name="Card" type="Area2D"]
+position = Vector2(0, -1)
+script = ExtResource("1_kikvd")
+
+[node name="front" type="Sprite2D" parent="."]
+texture = ExtResource("2_rjlel")
+hframes = 13
+vframes = 4
+
+[node name="back_temp" type="ColorRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -9.0
+offset_top = -15.0
+offset_right = 8.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="back" type="Sprite2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_nsakb")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]

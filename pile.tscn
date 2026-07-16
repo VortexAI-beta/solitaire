@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://cxdbuyruk6wd7"]
+
+[ext_resource type="Script" uid="uid://bfckpkqg5pr4o" path="res://pile.gd" id="1_rnvat"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1o32j"]
+size = Vector2(14, 26)
+
+[node name="Pile" type="Area2D" node_paths=PackedStringArray("marker")]
+script = ExtResource("1_rnvat")
+marker = NodePath("Center")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -8.0
+offset_top = -14.0
+offset_right = 8.0
+offset_bottom = 14.0
+mouse_filter = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_1o32j")
+
+[node name="Center" type="Marker2D" parent="."]

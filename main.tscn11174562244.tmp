@@ -1,0 +1,46 @@
+[gd_scene load_steps=3 format=3 uid="uid://rg8k6xv7iq2r"]
+
+[ext_resource type="Script" uid="uid://be81fqiy6jt0o" path="res://main.gd" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://cxdbuyruk6wd7" path="res://pile.tscn" id="2_0xm2m"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_ig7tw")
+
+[node name="Pile1" parent="." instance=ExtResource("2_0xm2m")]
+position = Vector2(16, 64)
+
+[node name="Pile2" parent="." instance=ExtResource("2_0xm2m")]
+position = Vector2(40, 64)
+
+[node name="Pile3" parent="." instance=ExtResource("2_0xm2m")]
+position = Vector2(64, 64)
+
+[node name="Pile4" parent="." instance=ExtResource("2_0xm2m")]
+position = Vector2(88, 64)
+
+[node name="Pile5" parent="." instance=ExtResource("2_0xm2m")]
+position = Vector2(112, 64)
+
+[node name="Pile6" parent="." instance=ExtResource("2_0xm2m")]
+position = Vector2(136, 64)
+
+[node name="Pile7" parent="." instance=ExtResource("2_0xm2m")]
+position = Vector2(160, 64)
+
+[node name="Deck" parent="." instance=ExtResource("2_0xm2m")]
+position = Vector2(16, 24)
+
+[node name="Waste" parent="." instance=ExtResource("2_0xm2m")]
+position = Vector2(40, 24)
+
+[node name="Foundation1" parent="." instance=ExtResource("2_0xm2m")]
+position = Vector2(88, 24)
+
+[node name="Foundation2" parent="." instance=ExtResource("2_0xm2m")]
+position = Vector2(112, 24)
+
+[node name="Foundation3" parent="." instance=ExtResource("2_0xm2m")]
+position = Vector2(136, 24)
+
+[node name="Foundation4" parent="." instance=ExtResource("2_0xm2m")]
+position = Vector2(160, 24)
