@@ -6,18 +6,19 @@ Task List
     - [x] When in the deck/foundation, they should never stack.
     - [x] Cards cannot be stacked on top of face down cards
   - [x] fix flip back of deck
-  - [] card selecting should be done based on the z-index if multiple cards are selected
-  - [] Implement deck draging functionality
-    - [] Not possible to get any card from the deck that is not a part of the waste plile
-    - [] Only the top card of the wate pile is grabable.
+  - [x] card selecting should be done based on the z-index if multiple cards are selected
+  - [x] Implement deck draging functionality
+    - [x] Not possible to get any card from the deck that is not a part of the waste plile
+    - [x] Only the top card of the wate pile is grabable.
   - [] Implement win condition
   - [] Implement undo/redo
   - [] implement start screen
   - [] add back of card graphics
   - [] add background graphics
+  - [] add small suit indicate on top of card
 
 Bugs:
-  - [] z-index for waste-pile
+  - [x] z-index for waste-pile -> Increased drag to 1000 and now it works. Not sure what the actual problem was tho.
 
 QOL:
   - [] Ensure that double klic pushes to foundational pile if possible

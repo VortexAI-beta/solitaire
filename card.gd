@@ -51,9 +51,7 @@ func flip():
 func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
     if event is InputEventMouseButton:
         if event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-            print('clicked suit: ', suit, ' value: ', value)
             card_clicked.emit(self, event);
             #flip();
         if !event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-            print('Released suit: ', suit, ' value: ', value)
             card_released.emit(self, event);

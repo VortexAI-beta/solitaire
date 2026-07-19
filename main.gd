@@ -166,7 +166,7 @@ func on_card_released(card: Card, _event: InputEventMouseButton):
         dragging_card.position = original_positon
         dragging_card.get_parent().remove_child(dragging_card)
         original_parent.add_child(dragging_card)
-        dragging_card.z_index = 0;
+        dragging_card.z_index = 1;
         dragging_card = null
 
 # When a card is stacked on top a another card, it must satisfy the following requirements:
@@ -195,6 +195,7 @@ func stack_on_card(cards: Array[Card]):
             dragging_card = null
 
             print("added to new pile")
+
         
         match pile_type:
             Pile.PileType.Deck:
@@ -206,7 +207,9 @@ func stack_on_card(cards: Array[Card]):
                     add_card_to_pile.call();
                     return true;
             Pile.PileType.Pile:
-                if Card.suit_to_color[top_card.suit] != Card.suit_to_color[dragging_card.suit] && top_card.value == dragging_card.value + 1:
+                var not_has_same_color = Card.suit_to_color[top_card.suit] != Card.suit_to_color[dragging_card.suit]
+                var has_lower_value = top_card.value == dragging_card.value + 1
+                if not_has_same_color && has_lower_value:
                     add_card_to_pile.call();
                     return true;
 

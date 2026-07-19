@@ -43,7 +43,7 @@ func add_stack(incoming_card: Card):
     for c in to_append:
         c.location = pile_type
         c.pile_idx = idx
-        c.z_index = cards.size()
+        c.z_index = 1 
         cards.append(c)
     print("updated all card data")
 
