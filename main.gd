@@ -72,7 +72,6 @@ func _ready() -> void:
     shuffle_and_deal()
 
 func on_card_clicked(card: Card, event: InputEventMouseButton):
-    print("card clicked")
     if card.location == Pile.PileType.Deck:
         if card == deck.cards.back():
             get_viewport().set_input_as_handled()
@@ -132,12 +131,6 @@ func get_card_pile(card: Card):
         return foundations[card.pile_idx]
 
 func on_card_released(card: Card, _event: InputEventMouseButton):
-    print('dragging card')
-    _print_card(card)
-
-    print('dragging_card')
-    print(dragging_card)
-
     dragging_card.scale = Vector2(1.1,1.1)
 
     # seems to be a bug here. I think somehow the tree is not properly maintained when a sub tree gets moved but only to a previous stack. Not sure why yet.
@@ -152,10 +145,6 @@ func on_card_released(card: Card, _event: InputEventMouseButton):
 
         cards.assign(areas.filter(func (x): return x is Card))
         overlapping_piles.assign(areas.filter(func (x): return x is Pile))
-
-        print(areas)
-        print(cards)
-        print(overlapping_piles)
 
         # cards have priority over piles
         if cards.size() > 0:
@@ -182,7 +171,6 @@ func stack_on_card(cards: Array[Card]):
         if overlapping_card.pile_idx == dragging_card.pile_idx:
             continue;
 
-        print("assign new pile")
         var current_pile = get_card_pile(dragging_card)
         var new_pile = get_card_pile(overlapping_card)
 
@@ -197,9 +185,6 @@ func stack_on_card(cards: Array[Card]):
             new_pile.add_stack(dragging_card)
             dragging_card = null
 
-            print("added to new pile")
-
-        
         match pile_type:
             Pile.PileType.Deck:
                 continue
@@ -260,34 +245,6 @@ func has_different_color(picked_card: Card, target_card: Card):
         return target_card.suit == Card.Suits.Club or target_card.suit == Card.Suits.Spade
     else:
         return target_card.suit == Card.Suits.Heart or target_card.suit == Card.Suits.Diamond
-
-# Checks if the current cards location overlaps with some stack that is not its own.
-func find_card_on_pile(card: Card):
-    var areas = card.get_overlapping_areas();
-    print('areas: ',areas)
-
-    for area in areas:
-        if area is Card:
-            print('card')
-            var pile = piles[area.pile_idx]
-        # if area is Pile:
-
-            
-
-    # for i in range(piles.size()):
-    #     var pile = piles[i]
-    #     if pile.is_empty():
-    #         var area: Area2D = pile.get_child(0)
-    #         if areas.find(area) != -1:
-    #             print('pile! anchor')
-    #             return i;
-    #     else:
-    #         var top_card = pile.back()
-    #         if areas.find(top_card) != -1:
-    #             print('pile! card')
-    #             return i;
-
-    return -1
 
 func find_card_on_foundation(card: Card):
     # will come back to this

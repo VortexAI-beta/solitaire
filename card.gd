@@ -58,10 +58,8 @@ func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 
 
 func _on_mouse_exited() -> void:
-    print('exited')
     scale = Vector2(1,1)
 
 func _on_mouse_entered() -> void:
-    print('entered')
     if (face_up):
         scale = Vector2(1.1,1.1)
