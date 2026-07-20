@@ -25,7 +25,7 @@ func setup(_suit: Suits, _value: int):
     value = _value
 
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:    
+func _ready() -> void:
     pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -55,3 +55,13 @@ func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
             #flip();
         if !event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
             card_released.emit(self, event);
+
+
+func _on_mouse_exited() -> void:
+    print('exited')
+    scale = Vector2(1,1)
+
+func _on_mouse_entered() -> void:
+    print('entered')
+    if (face_up):
+        scale = Vector2(1.1,1.1)

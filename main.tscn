@@ -11,57 +11,60 @@ deck = NodePath("Deck")
 waste = NodePath("Waste")
 
 [node name="Pile1" parent="." unique_id=352292858 instance=ExtResource("2_0xm2m")]
-position = Vector2(16, 64)
+position = Vector2(-72, 20)
 pile_type = 3
 
 [node name="Pile2" parent="." unique_id=1625583925 instance=ExtResource("2_0xm2m")]
-position = Vector2(40, 64)
+position = Vector2(-48, 20)
 pile_type = 3
 
 [node name="Pile3" parent="." unique_id=2064748189 instance=ExtResource("2_0xm2m")]
-position = Vector2(64, 64)
+position = Vector2(-24, 20)
 pile_type = 3
 
 [node name="Pile4" parent="." unique_id=988558915 instance=ExtResource("2_0xm2m")]
-position = Vector2(88, 64)
+position = Vector2(0, 20)
 pile_type = 3
 
 [node name="Pile5" parent="." unique_id=748954570 instance=ExtResource("2_0xm2m")]
-position = Vector2(112, 64)
+position = Vector2(24, 20)
 pile_type = 3
 
 [node name="Pile6" parent="." unique_id=1067222848 instance=ExtResource("2_0xm2m")]
-position = Vector2(136, 64)
+position = Vector2(48, 20)
 pile_type = 3
 
 [node name="Pile7" parent="." unique_id=1686334642 instance=ExtResource("2_0xm2m")]
-position = Vector2(160, 64)
+position = Vector2(72, 20)
 pile_type = 3
 
 [node name="Deck" parent="." unique_id=153838228 instance=ExtResource("2_0xm2m")]
-position = Vector2(16, 24)
+position = Vector2(-72, -20)
 
 [node name="Waste" parent="." unique_id=495741640 instance=ExtResource("2_0xm2m")]
-position = Vector2(40, 24)
+position = Vector2(-48, -20)
 pile_type = 1
 
 [node name="Foundation1" parent="." unique_id=1124893613 instance=ExtResource("2_0xm2m")]
-position = Vector2(88, 24)
+position = Vector2(0, -20)
 pile_type = 2
 
 [node name="Foundation2" parent="." unique_id=68908977 instance=ExtResource("2_0xm2m")]
-position = Vector2(112, 24)
+position = Vector2(24, -20)
 pile_type = 2
 
 [node name="Foundation3" parent="." unique_id=2008631093 instance=ExtResource("2_0xm2m")]
-position = Vector2(136, 24)
+position = Vector2(48, -20)
 pile_type = 2
 
 [node name="Foundation4" parent="." unique_id=751588958 instance=ExtResource("2_0xm2m")]
-position = Vector2(160, 24)
+position = Vector2(72, -20)
 pile_type = 2
 
 [node name="SubViewport" type="SubViewport" parent="." unique_id=731934743]
 size = Vector2i(640, 360)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=721828435]
+position = Vector2(0, 50)
 
 [connection signal="input_event" from="Deck" to="." method="_on_area_2d_input_event"]

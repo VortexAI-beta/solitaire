@@ -31,7 +31,7 @@ func add_stack(incoming_card: Card):
             PileType.Foundation:
                 incoming_card.position = Vector2(0, 0)
             PileType.Pile:
-                incoming_card.position = Vector2(0, 15)
+                incoming_card.position = Vector2(0, 10)
     
     # print("added new card to tree")
     # We need to add the card and all its nested children to our array

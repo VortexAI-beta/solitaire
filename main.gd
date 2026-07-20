@@ -93,6 +93,7 @@ func start_drag(card: Card):
     original_positon = card.position
     original_parent = card.get_parent()
     drag_offset = card.global_position - get_global_mouse_position()
+    card.scale = Vector2(1.2, 1.2)
     
     var global_position = card.global_position
     card.get_parent().remove_child(card)
@@ -136,6 +137,8 @@ func on_card_released(card: Card, _event: InputEventMouseButton):
 
     print('dragging_card')
     print(dragging_card)
+
+    dragging_card.scale = Vector2(1.1,1.1)
 
     # seems to be a bug here. I think somehow the tree is not properly maintained when a sub tree gets moved but only to a previous stack. Not sure why yet.
     if dragging_card:
