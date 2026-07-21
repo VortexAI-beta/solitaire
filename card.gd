@@ -16,6 +16,7 @@ var value: int # 1-13
 var face_up: bool = false;
 var location: Pile.PileType = Pile.PileType.Deck;
 var pile_idx: int = -1;
+var back_frame: int = 4;
 
 signal card_clicked(card_ref, event);
 signal card_released(card_ref, event);
@@ -35,7 +36,8 @@ func _process(delta: float) -> void:
 func updateSprite():
     $front.frame = (13 * suit) + value - 1
     $front.visible = face_up;
-    $back_temp.visible = !face_up;
+    $back.frame = back_frame;
+    $back.visible = !face_up;
 
 func initialize(_suit: Suits, _value: int):
     suit = _suit

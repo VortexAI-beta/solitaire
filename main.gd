@@ -48,13 +48,6 @@ func shuffle_and_deal():
             if i == j:
                 card.flip();
 
-    
-    # for card in deck.cards:
-    #     add_child(card);
-        
-    #     var position = deck.position;
-    #     card.position = position;
-
 func configure_piles():
     for i in range(piles.size()):
         piles[i].idx = i;
@@ -131,10 +124,9 @@ func get_card_pile(card: Card):
         return foundations[card.pile_idx]
 
 func on_card_released(card: Card, _event: InputEventMouseButton):
-    dragging_card.scale = Vector2(1.1,1.1)
-
     # seems to be a bug here. I think somehow the tree is not properly maintained when a sub tree gets moved but only to a previous stack. Not sure why yet.
     if dragging_card:
+        dragging_card.scale = Vector2(1.1,1.1)
         var areas = dragging_card.get_overlapping_areas()
 
         # var cards = areas.filter(func (x): return x is Card) as Array[Card]
@@ -162,7 +154,7 @@ func on_card_released(card: Card, _event: InputEventMouseButton):
         dragging_card = null
 
 # When a card is stacked on top a another card, it must satisfy the following requirements:
-# 1. if the card on which the dragging card is placed is on the deck or the waste, don't place it
+# 1. if the card on which the dragging card is placed is on the` deck or the waste, don't place it
 # 2. if the card will be placed on a pile, the top card should be this cards value + 1 and a different colored (red,blac) suit
 # 3. if the card will be placed on a foundation pile, the top card should be the value-1 and it should be the same suit  
 # Returns true on succes, fales otherwise 

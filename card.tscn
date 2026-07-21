@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cmxnpfegi65lj" path="res://card.gd" id="1_kikvd"]
 [ext_resource type="Texture2D" uid="uid://cct7mm26y0jbv" path="res://sprites/cards/spades/cards.png" id="2_rjlel"]
+[ext_resource type="Texture2D" uid="uid://rf5adcbigoo3" path="res://sprites/cards/spades/card_back.png" id="3_q5obu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nsakb"]
 size = Vector2(17, 30)
@@ -10,32 +11,19 @@ size = Vector2(17, 30)
 position = Vector2(0, -1)
 script = ExtResource("1_kikvd")
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1061054108]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_nsakb")
+
 [node name="front" type="Sprite2D" parent="." unique_id=1658466567]
 texture = ExtResource("2_rjlel")
 hframes = 13
 vframes = 4
 
-[node name="back_temp" type="ColorRect" parent="." unique_id=4029128]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -9.0
-offset_top = -15.0
-offset_right = 8.0
-offset_bottom = 15.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0, 0, 0, 1)
-
 [node name="back" type="Sprite2D" parent="." unique_id=1931612372]
 visible = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1061054108]
-position = Vector2(-0.5, 0)
-shape = SubResource("RectangleShape2D_nsakb")
+texture = ExtResource("3_q5obu")
+hframes = 5
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
