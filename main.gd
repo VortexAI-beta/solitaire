@@ -85,7 +85,9 @@ func start_drag(card: Card):
     original_positon = card.position
     original_parent = card.get_parent()
     drag_offset = card.global_position - get_global_mouse_position()
-    card.scale = Vector2(1.2, 1.2)
+
+    var tween = create_tween();
+    tween.tween_property(card, 'scale', Vector2(1.2,1.2), Constants.card_consts.tween_speed)
     
     var global_position = card.global_position
     card.get_parent().remove_child(card)
@@ -126,7 +128,9 @@ func get_card_pile(card: Card):
 func on_card_released(card: Card, _event: InputEventMouseButton):
     # seems to be a bug here. I think somehow the tree is not properly maintained when a sub tree gets moved but only to a previous stack. Not sure why yet.
     if dragging_card:
-        dragging_card.scale = Vector2(1.1,1.1)
+        var tween = create_tween();
+        tween.tween_property(dragging_card, 'scale', Vector2(1.1,1.1), Constants.card_consts.tween_speed)
+
         var areas = dragging_card.get_overlapping_areas()
 
         # var cards = areas.filter(func (x): return x is Card) as Array[Card]

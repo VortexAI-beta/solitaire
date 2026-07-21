@@ -60,8 +60,10 @@ func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 
 
 func _on_mouse_exited() -> void:
-    scale = Vector2(1,1)
+    create_tween().tween_property($".", 'scale', Vector2(1,1), Constants.card_consts.tween_speed)
+    # scale = Vector2(1,1)
 
 func _on_mouse_entered() -> void:
     if (face_up):
-        scale = Vector2(1.1,1.1)
+        create_tween().tween_property($".", 'scale', Vector2(1.1,1.1), Constants.card_consts.tween_speed)
+        # scale = Vector2(1.1,1.1)
