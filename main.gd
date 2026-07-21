@@ -160,7 +160,7 @@ func on_card_released(card: Card, _event: InputEventMouseButton):
 # Returns true on succes, fales otherwise 
 func stack_on_card(cards: Array[Card]):
     for overlapping_card in cards:
-        if overlapping_card.pile_idx == dragging_card.pile_idx:
+        if overlapping_card.pile_idx == dragging_card.pile_idx && overlapping_card.location == dragging_card.location:
             continue;
 
         var current_pile = get_card_pile(dragging_card)
