@@ -31,21 +31,23 @@ func draw_from_deck(deck: Pile, waste: Pile):
     for card in waste.cards:
         var pos = card.position
         undo_redo.add_do_property(card, 'position', Vector2.ZERO)
-        undo_redo.add_undo_reference(pos)
-        undo_redo.add_undo_property(card, 'postion', pos)
+        undo_redo.add_undo_property(card, 'position', pos)
  
     var cards: Array[Card] = deck.cards.slice(max(0,deck.cards.size()-3),  deck.cards.size());
+    
+    # needs to be registered in this card order, otherwise the scene tree will not be setup properly
+    for card in cards: 
+        undo_redo.add_undo_method(waste.remove_stack.bind(card))
+        undo_redo.add_undo_method(deck.add_stack.bind(card))
+        undo_redo.add_undo_method(card.flip);
+    
     cards.reverse();
-
 
     for card in cards:
         undo_redo.add_do_method(card.flip);
         undo_redo.add_do_method(deck.remove_stack.bind(card))
         undo_redo.add_do_method(waste.add_stack.bind(card))
 
-        undo_redo.add_undo_method(waste.remove_stack.bind(card))
-        undo_redo.add_undo_method(deck.add_stack.bind(card))
-        undo_redo.add_undo_method(card.flip);
 
     for i in range(cards.size()):
         var card = cards[i]
