@@ -138,7 +138,7 @@ func on_card_released():
             dragging_card.position = original_position
             dragging_card.z_index = 1;
 
-        tween.tween_property(dragging_card, 'rotation_degrees',0, 0.01)
+        tween.tween_property(dragging_card, 'rotation_degrees', 0, 0.01)
         dragging_card = null
 
 
@@ -267,7 +267,14 @@ func _on_redo_button_down() -> void:
     move_manager.redo()
 
 func _input(event: InputEvent) -> void:
-    print(event)
     if event is InputEventMouseButton:
         if !event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
             on_card_released()
+    if event is InputEventKey && !event.is_echo() && event.is_pressed():
+        if event.keycode == KEY_Z && event.ctrl_pressed:
+            if event.shift_pressed:
+                move_manager.redo()
+            else:
+                move_manager.undo()
+        if event.keycode == KEY_Y && event.ctrl_pressed:
+            move_manager.redo()
