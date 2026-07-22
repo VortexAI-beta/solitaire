@@ -10,7 +10,7 @@ var buffer = 10
 # Used for draggin cards
 var dragging_card: Card = null
 var drag_offset: Vector2 = Vector2.ZERO
-var original_positon: Vector2 = Vector2.ZERO
+var original_position: Vector2 = Vector2.ZERO
 var original_parent: Node = null 
 var original_pile_index: int = -1;
 var original_pile_location: int = -1;
@@ -20,6 +20,8 @@ var original_pile_location: int = -1;
 @export var foundations: Array[Pile] = []
 @export var deck: Pile;
 @export var waste: Pile;
+
+@onready var move_manager: MoveManager = $MoveManager
 
 func constructDeck():
     var cards: Array[Card] = [] 
@@ -82,7 +84,7 @@ func start_drag(card: Card):
         return
     
     dragging_card = card
-    original_positon = card.position
+    original_position = card.position
     original_parent = card.get_parent()
     drag_offset = card.global_position - get_global_mouse_position()
 
@@ -96,24 +98,25 @@ func start_drag(card: Card):
     card.z_index=100
 
 func draw_from_deck():
-    var position = waste.position
+    move_manager.draw_from_deck(deck, waste)
+    # var position = waste.position
     
-    for card in waste.cards:
-        card.position = Vector2(0,0)
+    # for card in waste.cards:
+    #     card.position = Vector2(0,0)
  
-    var cards: Array[Card] = deck.cards.slice(max(0,deck.cards.size()-3),  deck.cards.size());
-    cards.reverse();
-    for card in cards:
-        card.flip();
-        deck.remove_stack(card)
-        waste.add_stack(card)
+    # var cards: Array[Card] = deck.cards.slice(max(0,deck.cards.size()-3),  deck.cards.size());
+    # cards.reverse();
+    # for card in cards:
+    #     card.flip();
+    #     deck.remove_stack(card)
+    #     waste.add_stack(card)
 
-    for i in range(cards.size()):
-        var card = cards[i]
-        if i == 0:
-            card.position = Vector2(0, 0)
-        else:
-            card.position = Vector2(10, 0)
+    # for i in range(cards.size()):
+    #     var card = cards[i]
+    #     if i == 0:
+    #         card.position = Vector2(0, 0)
+    #     else:
+    #         card.position = Vector2(10, 0)
 
 func get_card_pile(card: Card):
     if card.location == Pile.PileType.Deck:
@@ -151,7 +154,7 @@ func on_card_released(card: Card, _event: InputEventMouseButton):
             if stack_on_pile(overlapping_piles):
                 return
         
-        dragging_card.position = original_positon
+        dragging_card.position = original_position
         dragging_card.get_parent().remove_child(dragging_card)
         original_parent.add_child(dragging_card)
         dragging_card.z_index = 1;
@@ -177,8 +180,7 @@ func stack_on_card(cards: Array[Card]):
             continue
 
         var add_card_to_pile = func():
-            current_pile.remove_stack(dragging_card)
-            new_pile.add_stack(dragging_card)
+            move_manager.move_card_between_piles(dragging_card, current_pile, new_pile, original_position)
             dragging_card = null
 
         match pile_type:
@@ -213,8 +215,7 @@ func stack_on_pile(overlapping_piles: Array[Pile]):
 
         var add_card_to_pile = func():
             var current_pile = get_card_pile(dragging_card)
-            current_pile.remove_stack(dragging_card)
-            pile.add_stack(dragging_card)
+            move_manager.move_card_between_piles(dragging_card, current_pile, pile, original_position)
             dragging_card = null
             return
         
@@ -279,3 +280,10 @@ func _suit_to_string(suit: Card.Suits):
         return 'Diamond'
     else:
         return 'Unknown'
+
+
+func _on_undo_button_down() -> void:
+    move_manager.undo()
+
+func _on_redo_button_down() -> void:
+    move_manager.redo()

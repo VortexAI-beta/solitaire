@@ -79,7 +79,13 @@ func remove_stack(starting_card: Card):
     cards = cards.slice(0, start_idx)
     
     # Ensure the new top card is face up (only flip if it's face down)
-    if not cards.is_empty() && pile_type == PileType.Pile:
-        var top_card = cards.back()
-        if not top_card.face_up:
-            top_card.flip()
+    # if not cards.is_empty() && pile_type == PileType.Pile:
+    #     var top_card = cards.back()
+    #     if not top_card.face_up:
+    #         top_card.flip()
+
+func is_top_card(card: Card):
+    return card == cards.back()
+
+func flip_top_card():
+    cards.back().flip()

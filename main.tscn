@@ -2,6 +2,17 @@
 
 [ext_resource type="Script" uid="uid://be81fqiy6jt0o" path="res://main.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://cxdbuyruk6wd7" path="res://pile.tscn" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://df771v8nup2st" path="res://move_manager.tscn" id="2_1bvp3"]
+[ext_resource type="Script" uid="uid://mkxmyr5dpvo" path="res://move_manager.gd" id="3_lquwl"]
+[ext_resource type="Texture2D" uid="uid://bkw2rn0tnxywl" path="res://sprites/icon_pack_by_mewily_32px32_1_margin.png" id="5_lquwl"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7mycd"]
+atlas = ExtResource("5_lquwl")
+region = Rect2(69, 70, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lquwl"]
+atlas = ExtResource("5_lquwl")
+region = Rect2(171.43585, 70.15669, 32, 32)
 
 [node name="Main" type="Node2D" unique_id=420920781 node_paths=PackedStringArray("piles", "foundations", "deck", "waste")]
 script = ExtResource("1_ig7tw")
@@ -9,6 +20,9 @@ piles = [NodePath("Pile1"), NodePath("Pile2"), NodePath("Pile3"), NodePath("Pile
 foundations = [NodePath("Foundation1"), NodePath("Foundation2"), NodePath("Foundation3"), NodePath("Foundation4")]
 deck = NodePath("Deck")
 waste = NodePath("Waste")
+
+[node name="MoveManager" parent="." unique_id=1411783430 instance=ExtResource("2_1bvp3")]
+script = ExtResource("3_lquwl")
 
 [node name="Pile1" parent="." unique_id=352292858 instance=ExtResource("2_0xm2m")]
 position = Vector2(-72, 20)
@@ -61,10 +75,23 @@ pile_type = 2
 position = Vector2(72, -20)
 pile_type = 2
 
-[node name="SubViewport" type="SubViewport" parent="." unique_id=731934743]
-size = Vector2i(640, 360)
-
 [node name="Camera2D" type="Camera2D" parent="." unique_id=721828435]
 position = Vector2(0, 50)
 
+[node name="undo" type="TextureButton" parent="." unique_id=1622329468]
+offset_left = -151.0
+offset_top = -34.0
+offset_right = -119.0
+offset_bottom = -2.0
+texture_normal = SubResource("AtlasTexture_7mycd")
+
+[node name="redo" type="TextureButton" parent="." unique_id=685252586]
+offset_left = -119.0
+offset_top = -34.0
+offset_right = -87.0
+offset_bottom = -2.0
+texture_normal = SubResource("AtlasTexture_lquwl")
+
 [connection signal="input_event" from="Deck" to="." method="_on_area_2d_input_event"]
+[connection signal="button_down" from="undo" to="." method="_on_undo_button_down"]
+[connection signal="button_down" from="redo" to="." method="_on_redo_button_down"]
