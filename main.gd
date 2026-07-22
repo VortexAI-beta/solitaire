@@ -14,6 +14,7 @@ var original_position: Vector2 = Vector2.ZERO
 var original_parent: Node = null 
 var original_pile_index: int = -1;
 var original_pile_location: int = -1;
+var prev_mouse_position: Vector2 = Vector2(0,0)
 
 # Where the aces are stored
 @export var piles: Array[Pile] = []
@@ -31,7 +32,7 @@ func constructDeck():
             card.initialize(suit , i);
             # card.initialize(suit / 2, i%3 +1);
             card.card_clicked.connect(on_card_clicked)
-            card.card_released.connect(on_card_released)
+            # card.card_released.connect(on_card_released)
             cards.append(card)
             
     cards.shuffle()
@@ -109,8 +110,7 @@ func get_card_pile(card: Card):
     elif card.location == Pile.PileType.Foundation:
         return foundations[card.pile_idx]
 
-func on_card_released(card: Card, _event: InputEventMouseButton):
-    # seems to be a bug here. I think somehow the tree is not properly maintained when a sub tree gets moved but only to a previous stack. Not sure why yet.
+func on_card_released():
     if dragging_card:
         var tween = create_tween();
         tween.tween_property(dragging_card, 'scale', Vector2(1.1,1.1), Constants.card_consts.tween_speed)
@@ -120,23 +120,27 @@ func on_card_released(card: Card, _event: InputEventMouseButton):
         var cards: Array[Card] = []
         var overlapping_piles: Array[Pile]= []
 
+        var added_to_stack: bool = false
+
         cards.assign(areas.filter(func (x): return x is Card))
         overlapping_piles.assign(areas.filter(func (x): return x is Pile))
 
         # cards have priority over piles
         if cards.size() > 0:
-            if stack_on_card(cards):
-                return
+            added_to_stack = stack_on_card(cards)
 
-        if overlapping_piles.size() > 0:
-            if stack_on_pile(overlapping_piles):
-                return
-        
-        dragging_card.position = original_position
-        dragging_card.get_parent().remove_child(dragging_card)
-        original_parent.add_child(dragging_card)
-        dragging_card.z_index = 1;
+        if overlapping_piles.size() > 0 && !added_to_stack:
+            added_to_stack = stack_on_pile(overlapping_piles)
+
+        if(!added_to_stack):
+            dragging_card.get_parent().remove_child(dragging_card)
+            original_parent.add_child(dragging_card)
+            dragging_card.position = original_position
+            dragging_card.z_index = 1;
+
+        tween.tween_property(dragging_card, 'rotation_degrees',0, 0.01)
         dragging_card = null
+
 
 # When a card is stacked on top a another card, it must satisfy the following requirements:
 # 1. if the card on which the dragging card is placed is on the` deck or the waste, don't place it
@@ -224,7 +228,14 @@ func has_different_color(picked_card: Card, target_card: Card):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
     if dragging_card:
+        var tween = create_tween()
+        var diff_x = (get_global_mouse_position() - prev_mouse_position).x
+        print(diff_x)
         dragging_card.global_position = get_global_mouse_position() + drag_offset
+        var diff = clamp(diff_x,-45,45)
+        tween.tween_property(dragging_card, 'rotation_degrees', diff*10, 0.05)
+        # dragging_card.rotation_degrees = diff*10
+    prev_mouse_position = get_global_mouse_position()
 
 # turn the waste pile back onto the deck
 func _on_deck_area_click(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
@@ -254,3 +265,9 @@ func _on_undo_button_down() -> void:
 
 func _on_redo_button_down() -> void:
     move_manager.redo()
+
+func _input(event: InputEvent) -> void:
+    print(event)
+    if event is InputEventMouseButton:
+        if !event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+            on_card_released()
