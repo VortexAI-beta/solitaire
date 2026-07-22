@@ -3,13 +3,13 @@ extends Node2D
 var card_scene = preload("res://card.tscn")
 var pile_scene = preload("res://pile.tscn")
 
-var card_width = 30
-var card_length = 40
-var buffer = 10
+const card_width = 30
+const card_length = 40
+const buffer = 10
+const drag_offset: Vector2 = Vector2(0,15)
 
 # Used for draggin cards
 var dragging_card: Card = null
-var drag_offset: Vector2 = Vector2.ZERO
 var original_position: Vector2 = Vector2.ZERO
 var original_parent: Node = null 
 var original_pile_index: int = -1;
@@ -86,7 +86,6 @@ func start_drag(card: Card):
     dragging_card = card
     original_position = card.position
     original_parent = card.get_parent()
-    drag_offset = card.global_position - get_global_mouse_position()
 
     var tween = create_tween();
     tween.tween_property(card, 'scale', Vector2(1.2,1.2), Constants.card_consts.tween_speed)
@@ -98,25 +97,7 @@ func start_drag(card: Card):
     card.z_index=100
 
 func draw_from_deck():
-    move_manager.draw_from_deck(deck, waste)
-    # var position = waste.position
-    
-    # for card in waste.cards:
-    #     card.position = Vector2(0,0)
- 
-    # var cards: Array[Card] = deck.cards.slice(max(0,deck.cards.size()-3),  deck.cards.size());
-    # cards.reverse();
-    # for card in cards:
-    #     card.flip();
-    #     deck.remove_stack(card)
-    #     waste.add_stack(card)
-
-    # for i in range(cards.size()):
-    #     var card = cards[i]
-    #     if i == 0:
-    #         card.position = Vector2(0, 0)
-    #     else:
-    #         card.position = Vector2(10, 0)
+    move_manager.draw_from_deck()
 
 func get_card_pile(card: Card):
     if card.location == Pile.PileType.Deck:
@@ -135,9 +116,6 @@ func on_card_released(card: Card, _event: InputEventMouseButton):
         tween.tween_property(dragging_card, 'scale', Vector2(1.1,1.1), Constants.card_consts.tween_speed)
 
         var areas = dragging_card.get_overlapping_areas()
-
-        # var cards = areas.filter(func (x): return x is Card) as Array[Card]
-        # var overlapping_piles = areas.filter(func (x): return x is Pile) as Array[Pile]
 
         var cards: Array[Card] = []
         var overlapping_piles: Array[Pile]= []
@@ -243,27 +221,16 @@ func has_different_color(picked_card: Card, target_card: Card):
     else:
         return target_card.suit == Card.Suits.Heart or target_card.suit == Card.Suits.Diamond
 
-func find_card_on_foundation(card: Card):
-    # will come back to this
-
-    return -1;
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
     if dragging_card:
         dragging_card.global_position = get_global_mouse_position() + drag_offset
 
 # turn the waste pile back onto the deck
-func _on_area_2d_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
+func _on_deck_area_click(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
     if event is InputEventMouseButton:
         if event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-            if (deck.cards.size() == 0):
-                for card in waste.cards:
-                    card.flip();
-                waste.cards.reverse()
-                for card in waste.cards:
-                    waste.remove_stack(card)
-                    deck.add_stack(card)
+            move_manager.return_waste_to_deck()
 
 #Debug
 func _print_card(card: Card):

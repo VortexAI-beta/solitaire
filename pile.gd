@@ -84,8 +84,13 @@ func remove_stack(starting_card: Card):
     #     if not top_card.face_up:
     #         top_card.flip()
 
-func is_top_card(card: Card):
-    return card == cards.back()
+func should_flip_next_card(card: Card) -> bool:
+    var card_idx = cards.find(card)
+    if card_idx < 1: return false
+
+    if !cards[card_idx-1].face_up:
+        return true
+    return false
 
 func flip_top_card():
     cards.back().flip()

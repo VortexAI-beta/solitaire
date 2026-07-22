@@ -11,7 +11,7 @@ Task List
     - [x] Not possible to get any card from the deck that is not a part of the waste plile
     - [x] Only the top card of the wate pile is grabable.
   - [] Implement win condition
-  - [] Implement undo/redo
+  - [x] Implement undo/redo
   - [] implement start screen
   - [] add back of card graphics
   - [] add background graphics
@@ -22,5 +22,5 @@ Bugs:
 
 QOL:
   - [] Ensure that double klic pushes to foundational pile if possible
-  - [] Undo Redo
+  - [x] Undo Redo
   - [] Checker for feasible solution

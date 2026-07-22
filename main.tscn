@@ -21,8 +21,10 @@ foundations = [NodePath("Foundation1"), NodePath("Foundation2"), NodePath("Found
 deck = NodePath("Deck")
 waste = NodePath("Waste")
 
-[node name="MoveManager" parent="." unique_id=1411783430 instance=ExtResource("2_1bvp3")]
+[node name="MoveManager" parent="." unique_id=1411783430 node_paths=PackedStringArray("waste", "deck") instance=ExtResource("2_1bvp3")]
 script = ExtResource("3_lquwl")
+waste = NodePath("../Waste")
+deck = NodePath("../Deck")
 
 [node name="Pile1" parent="." unique_id=352292858 instance=ExtResource("2_0xm2m")]
 position = Vector2(-72, 20)
@@ -92,6 +94,6 @@ offset_right = -87.0
 offset_bottom = -2.0
 texture_normal = SubResource("AtlasTexture_lquwl")
 
-[connection signal="input_event" from="Deck" to="." method="_on_area_2d_input_event"]
+[connection signal="input_event" from="Deck" to="." method="_on_deck_area_click"]
 [connection signal="button_down" from="undo" to="." method="_on_undo_button_down"]
 [connection signal="button_down" from="redo" to="." method="_on_redo_button_down"]
