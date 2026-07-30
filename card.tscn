@@ -8,7 +8,6 @@
 size = Vector2(17, 30)
 
 [node name="Card" type="Area2D" unique_id=1486396699]
-position = Vector2(0, -1)
 script = ExtResource("1_kikvd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1061054108]
