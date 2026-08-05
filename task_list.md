@@ -15,7 +15,7 @@ Task List
   - [x] add small suit indicate on top of card
   - [] Implement win condition
   - [] implement start screen
-  - [] add background graphics
+  - [x] add background graphics
 
 Bugs:
   - [x] z-index for waste-pile -> Increased drag to 1000 and now it works. Not sure what the actual problem was tho.

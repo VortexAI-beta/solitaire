@@ -21,6 +21,15 @@ foundations = [NodePath("Foundation1"), NodePath("Foundation2"), NodePath("Found
 deck = NodePath("Deck")
 waste = NodePath("Waste")
 
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1790404026]
+z_index = -1
+offset_left = -160.0
+offset_top = -41.0
+offset_right = 160.0
+offset_bottom = 139.0
+mouse_filter = 2
+color = Color(0.27450982, 0.69411767, 0.27450982, 1)
+
 [node name="MoveManager" parent="." unique_id=1411783430 node_paths=PackedStringArray("waste", "deck") instance=ExtResource("2_1bvp3")]
 script = ExtResource("3_lquwl")
 waste = NodePath("../Waste")
