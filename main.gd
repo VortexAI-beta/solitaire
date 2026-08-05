@@ -15,6 +15,7 @@ var original_parent: Node = null
 var original_pile_index: int = -1;
 var original_pile_location: int = -1;
 var prev_mouse_position: Vector2 = Vector2(0,0)
+var card_tween = null;
 
 # Where the aces are stored
 @export var piles: Array[Pile] = []
@@ -88,8 +89,12 @@ func start_drag(card: Card):
     original_position = card.position
     original_parent = card.get_parent()
 
-    var tween = create_tween();
-    tween.tween_property(card, 'scale', Vector2(1.2,1.2), Constants.card_consts.tween_speed)
+    
+    if (card_tween):
+        card_tween.kill()
+    card_tween = create_tween()
+
+    card_tween.tween_property(card, 'scale', Vector2(1.2,1.2), Constants.card_consts.tween_speed)
     
     var global_position = card.global_position
     card.get_parent().remove_child(card)
@@ -112,8 +117,12 @@ func get_card_pile(card: Card):
 
 func on_card_released():
     if dragging_card:
-        var tween = create_tween();
-        tween.tween_property(dragging_card, 'scale', Vector2(1.1,1.1), Constants.card_consts.tween_speed)
+        if (card_tween):
+            card_tween.kill()
+
+        card_tween = create_tween()
+
+        card_tween.tween_property(dragging_card, 'scale', Vector2(1.1,1.1), Constants.card_consts.tween_speed)
 
         var areas = dragging_card.get_overlapping_areas()
 
@@ -138,7 +147,7 @@ func on_card_released():
             dragging_card.position = original_position
             dragging_card.z_index = 1;
 
-        tween.tween_property(dragging_card, 'rotation_degrees', 0, 0.01)
+        card_tween.tween_property(dragging_card, 'rotation_degrees', 0, 0.1)
         dragging_card = null
 
 
@@ -163,7 +172,6 @@ func stack_on_card(cards: Array[Card]):
 
         var add_card_to_pile = func():
             move_manager.move_card_between_piles(dragging_card, current_pile, new_pile, original_position)
-            dragging_card = null
 
         match pile_type:
             Pile.PileType.Deck:
@@ -198,7 +206,6 @@ func stack_on_pile(overlapping_piles: Array[Pile]):
         var add_card_to_pile = func():
             var current_pile = get_card_pile(dragging_card)
             move_manager.move_card_between_piles(dragging_card, current_pile, pile, original_position)
-            dragging_card = null
             return
         
         match pile.pile_type:
@@ -228,12 +235,15 @@ func has_different_color(picked_card: Card, target_card: Card):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
     if dragging_card:
-        var tween = create_tween()
+        if (card_tween):
+            card_tween.kill()
+        card_tween = create_tween()
+
         var diff_x = (get_global_mouse_position() - prev_mouse_position).x
         print(diff_x)
         dragging_card.global_position = get_global_mouse_position() + drag_offset
         var diff = clamp(diff_x,-45,45)
-        tween.tween_property(dragging_card, 'rotation_degrees', diff*10, 0.05)
+        card_tween.tween_property(dragging_card, 'rotation_degrees', diff*10, 0.05)
         # dragging_card.rotation_degrees = diff*10
     prev_mouse_position = get_global_mouse_position()
 
