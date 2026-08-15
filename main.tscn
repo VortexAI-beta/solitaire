@@ -2,8 +2,6 @@
 
 [ext_resource type="Script" uid="uid://be81fqiy6jt0o" path="res://main.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://cxdbuyruk6wd7" path="res://pile.tscn" id="2_0xm2m"]
-[ext_resource type="PackedScene" uid="uid://df771v8nup2st" path="res://move_manager.tscn" id="2_1bvp3"]
-[ext_resource type="Script" uid="uid://mkxmyr5dpvo" path="res://move_manager.gd" id="3_lquwl"]
 [ext_resource type="Texture2D" uid="uid://bkw2rn0tnxywl" path="res://sprites/icon_pack_by_mewily_32px32_1_margin.png" id="5_lquwl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7mycd"]
@@ -15,13 +13,17 @@ atlas = ExtResource("5_lquwl")
 region = Rect2(171.43585, 70.15669, 32, 32)
 
 [node name="Main" type="Node2D" unique_id=420920781 node_paths=PackedStringArray("piles", "foundations", "deck", "waste")]
+process_mode = 3
 script = ExtResource("1_ig7tw")
-piles = [NodePath("Pile1"), NodePath("Pile2"), NodePath("Pile3"), NodePath("Pile4"), NodePath("Pile5"), NodePath("Pile6"), NodePath("Pile7")]
-foundations = [NodePath("Foundation1"), NodePath("Foundation2"), NodePath("Foundation3"), NodePath("Foundation4")]
-deck = NodePath("Deck")
-waste = NodePath("Waste")
+piles = [NodePath("Scene/Pile1"), NodePath("Scene/Pile2"), NodePath("Scene/Pile3"), NodePath("Scene/Pile4"), NodePath("Scene/Pile5"), NodePath("Scene/Pile6"), NodePath("Scene/Pile7")]
+foundations = [NodePath("Scene/Foundation1"), NodePath("Scene/Foundation2"), NodePath("Scene/Foundation3"), NodePath("Scene/Foundation4")]
+deck = NodePath("Scene/Deck")
+waste = NodePath("Scene/Waste")
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=1790404026]
+[node name="Scene" type="Node2D" parent="." unique_id=1859835655]
+process_mode = 1
+
+[node name="ColorRect" type="ColorRect" parent="Scene" unique_id=1790404026]
 z_index = -1
 offset_left = -160.0
 offset_top = -41.0
@@ -30,79 +32,74 @@ offset_bottom = 139.0
 mouse_filter = 2
 color = Color(0.27450982, 0.69411767, 0.27450982, 1)
 
-[node name="MoveManager" parent="." unique_id=1411783430 node_paths=PackedStringArray("waste", "deck") instance=ExtResource("2_1bvp3")]
-script = ExtResource("3_lquwl")
-waste = NodePath("../Waste")
-deck = NodePath("../Deck")
-
-[node name="Pile1" parent="." unique_id=352292858 instance=ExtResource("2_0xm2m")]
+[node name="Pile1" parent="Scene" unique_id=352292858 instance=ExtResource("2_0xm2m")]
 position = Vector2(-37, 26)
 pile_type = 3
 
-[node name="Pile2" parent="." unique_id=1625583925 instance=ExtResource("2_0xm2m")]
+[node name="Pile2" parent="Scene" unique_id=1625583925 instance=ExtResource("2_0xm2m")]
 position = Vector2(-7, 26)
 pile_type = 3
 
-[node name="Pile3" parent="." unique_id=2064748189 instance=ExtResource("2_0xm2m")]
+[node name="Pile3" parent="Scene" unique_id=2064748189 instance=ExtResource("2_0xm2m")]
 position = Vector2(23, 26)
 pile_type = 3
 
-[node name="Pile4" parent="." unique_id=988558915 instance=ExtResource("2_0xm2m")]
+[node name="Pile4" parent="Scene" unique_id=988558915 instance=ExtResource("2_0xm2m")]
 position = Vector2(53, 26)
 pile_type = 3
 
-[node name="Pile5" parent="." unique_id=748954570 instance=ExtResource("2_0xm2m")]
+[node name="Pile5" parent="Scene" unique_id=748954570 instance=ExtResource("2_0xm2m")]
 position = Vector2(83, 26)
 pile_type = 3
 
-[node name="Pile6" parent="." unique_id=1067222848 instance=ExtResource("2_0xm2m")]
+[node name="Pile6" parent="Scene" unique_id=1067222848 instance=ExtResource("2_0xm2m")]
 position = Vector2(113, 26)
 pile_type = 3
 
-[node name="Pile7" parent="." unique_id=1686334642 instance=ExtResource("2_0xm2m")]
+[node name="Pile7" parent="Scene" unique_id=1686334642 instance=ExtResource("2_0xm2m")]
 position = Vector2(143, 26)
 pile_type = 3
 
-[node name="Deck" parent="." unique_id=153838228 instance=ExtResource("2_0xm2m")]
+[node name="Deck" parent="Scene" unique_id=153838228 instance=ExtResource("2_0xm2m")]
 position = Vector2(-37, -17)
 
-[node name="Waste" parent="." unique_id=495741640 instance=ExtResource("2_0xm2m")]
+[node name="Waste" parent="Scene" unique_id=495741640 instance=ExtResource("2_0xm2m")]
 position = Vector2(-7, -17)
 pile_type = 1
 
-[node name="Foundation1" parent="." unique_id=1124893613 instance=ExtResource("2_0xm2m")]
+[node name="Foundation1" parent="Scene" unique_id=1124893613 instance=ExtResource("2_0xm2m")]
 position = Vector2(53, -17)
 pile_type = 2
 
-[node name="Foundation2" parent="." unique_id=68908977 instance=ExtResource("2_0xm2m")]
+[node name="Foundation2" parent="Scene" unique_id=68908977 instance=ExtResource("2_0xm2m")]
 position = Vector2(83, -17)
 pile_type = 2
 
-[node name="Foundation3" parent="." unique_id=2008631093 instance=ExtResource("2_0xm2m")]
+[node name="Foundation3" parent="Scene" unique_id=2008631093 instance=ExtResource("2_0xm2m")]
 position = Vector2(113, -17)
 pile_type = 2
 
-[node name="Foundation4" parent="." unique_id=751588958 instance=ExtResource("2_0xm2m")]
+[node name="Foundation4" parent="Scene" unique_id=751588958 instance=ExtResource("2_0xm2m")]
 position = Vector2(143, -17)
 pile_type = 2
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=721828435]
+[node name="Camera2D" type="Camera2D" parent="Scene" unique_id=721828435]
 position = Vector2(0, 49)
 
-[node name="undo" type="TextureButton" parent="." unique_id=1622329468]
+[node name="undo" type="TextureButton" parent="Scene" unique_id=1622329468]
 offset_left = -151.0
 offset_top = -34.0
 offset_right = -119.0
 offset_bottom = -2.0
 texture_normal = SubResource("AtlasTexture_7mycd")
 
-[node name="redo" type="TextureButton" parent="." unique_id=685252586]
+[node name="redo" type="TextureButton" parent="Scene" unique_id=685252586]
 offset_left = -119.0
 offset_top = -34.0
 offset_right = -87.0
 offset_bottom = -2.0
 texture_normal = SubResource("AtlasTexture_lquwl")
 
-[connection signal="input_event" from="Deck" to="." method="_on_deck_area_click"]
-[connection signal="button_down" from="undo" to="." method="_on_undo_button_down"]
-[connection signal="button_down" from="redo" to="." method="_on_redo_button_down"]
+[connection signal="input_event" from="Scene/Deck" to="." method="_on_deck_area_click"]
+[connection signal="button_down" from="Scene/undo" to="." method="_on_undo_button_down"]
+[connection signal="button_down" from="Scene/redo" to="." method="_on_redo_button_down"]

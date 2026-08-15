@@ -2,6 +2,7 @@ extends Node2D
 
 var card_scene = preload("res://card.tscn")
 var pile_scene = preload("res://pile.tscn")
+var move_manager_scene = preload("res://move_manager.tscn")
 
 const card_width = 30
 const card_length = 40
@@ -23,7 +24,7 @@ var card_tween = null;
 @export var deck: Pile;
 @export var waste: Pile;
 
-@onready var move_manager: MoveManager = $MoveManager
+@onready var move_manager: MoveManager = move_manager_scene.instantiate()
 
 func constructDeck():
     var cards: Array[Card] = [] 
@@ -284,6 +285,14 @@ func _suit_to_string(suit: Card.Suits):
     else:
         return 'Unknown'
 
+func check_win():
+    var is_win: bool = foundations.all(func(pile): return pile.cards.size() == 13)
+    if is_win:
+        win()
+
+func win():
+    get_tree().paused = true;
+
 
 func _on_undo_button_down() -> void:
     move_manager.undo()
@@ -303,3 +312,6 @@ func _input(event: InputEvent) -> void:
                 move_manager.undo()
         if event.keycode == KEY_Y && event.ctrl_pressed:
             move_manager.redo()
+
+        if event.keycode == KEY_ESCAPE:
+            get_tree().paused = !get_tree().paused;

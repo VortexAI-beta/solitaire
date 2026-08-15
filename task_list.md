@@ -15,13 +15,14 @@ Task List
   - [x] add small suit indicate on top of card
   - [] Implement win condition
   - [] implement start screen
+  - [] implement pause screen
   - [x] add background graphics
 
 Bugs:
   - [x] z-index for waste-pile -> Increased drag to 1000 and now it works. Not sure what the actual problem was tho.
 
 QOL:
-  - [] Ensure that double klic pushes to foundational pile if possible
+  - [x] Ensure that double klic pushes to foundational pile if possible
   - [x] Undo Redo
   - [] Checker for feasible solution
   - [x] added sway to the cards
