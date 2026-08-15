@@ -19,6 +19,7 @@ var pile_idx: int = -1;
 var back_frame: int = 4;
 
 signal card_clicked(card_ref, event);
+signal card_double_clicked(card_ref, event);
 
 func setup(_suit: Suits, _value: int):
     suit = _suit
@@ -52,7 +53,10 @@ func flip():
 func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
     if event is InputEventMouseButton:
         if event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-            card_clicked.emit(self, event);
+            if event.double_click:
+                card_double_clicked.emit(self, event)
+            else:
+                card_clicked.emit(self, event);
 
 
 func _on_mouse_exited() -> void:

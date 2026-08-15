@@ -33,6 +33,7 @@ func constructDeck():
             card.initialize(suit , i);
             # card.initialize(suit / 2, i%3 +1);
             card.card_clicked.connect(on_card_clicked)
+            card.card_double_clicked.connect(on_card_double_clicked)
             # card.card_released.connect(on_card_released)
             cards.append(card)
             
@@ -80,6 +81,20 @@ func on_card_clicked(card: Card, event: InputEventMouseButton):
         start_drag(card)
     elif card.location == Pile.PileType.Foundation:
         start_drag(card)
+
+func on_card_double_clicked(card: Card, event: InputEventMouseButton):
+    if card.location == Pile.PileType.Pile || card.location == Pile.PileType.Waste:
+        if card.value == 1:
+            var empty_piles: Array[Pile] = foundations.filter(func(pile): return pile.cards.is_empty())
+            stack_on_pile(empty_piles, card)
+        else:
+            var same_suit_foundations = foundations.filter(func(pile): return !pile.cards.is_empty() && pile.cards[0].suit == card.suit);
+            if same_suit_foundations.is_empty():
+                return;
+            var top_card: Card = same_suit_foundations[-1].cards[-1]
+            stack_on_card([top_card], card)
+    else:
+        on_card_clicked(card, event)
 
 func start_drag(card: Card):
     if !card.face_up:
@@ -136,10 +151,10 @@ func on_card_released():
 
         # cards have priority over piles
         if cards.size() > 0:
-            added_to_stack = stack_on_card(cards)
+            added_to_stack = stack_on_card(cards, dragging_card)
 
         if overlapping_piles.size() > 0 && !added_to_stack:
-            added_to_stack = stack_on_pile(overlapping_piles)
+            added_to_stack = stack_on_pile(overlapping_piles, dragging_card)
 
         if(!added_to_stack):
             dragging_card.get_parent().remove_child(dragging_card)
@@ -156,12 +171,12 @@ func on_card_released():
 # 2. if the card will be placed on a pile, the top card should be this cards value + 1 and a different colored (red,blac) suit
 # 3. if the card will be placed on a foundation pile, the top card should be the value-1 and it should be the same suit  
 # Returns true on succes, fales otherwise 
-func stack_on_card(cards: Array[Card]):
+func stack_on_card(cards: Array[Card], card: Card):
     for overlapping_card in cards:
-        if overlapping_card.pile_idx == dragging_card.pile_idx && overlapping_card.location == dragging_card.location:
+        if overlapping_card.pile_idx == card.pile_idx && overlapping_card.location == card.location:
             continue;
 
-        var current_pile = get_card_pile(dragging_card)
+        var current_pile = get_card_pile(card)
         var new_pile = get_card_pile(overlapping_card)
 
         var pile_type = new_pile.pile_type
@@ -171,7 +186,7 @@ func stack_on_card(cards: Array[Card]):
             continue
 
         var add_card_to_pile = func():
-            move_manager.move_card_between_piles(dragging_card, current_pile, new_pile, original_position)
+            move_manager.move_card_between_piles(card, current_pile, new_pile, original_position)
 
         match pile_type:
             Pile.PileType.Deck:
@@ -179,12 +194,12 @@ func stack_on_card(cards: Array[Card]):
             Pile.PileType.Waste:
                 continue
             Pile.PileType.Foundation:
-                if top_card.suit == dragging_card.suit && top_card.value == dragging_card.value - 1:
+                if top_card.suit == card.suit && top_card.value == card.value - 1:
                     add_card_to_pile.call();
                     return true;
             Pile.PileType.Pile:
-                var not_has_same_color = Card.suit_to_color[top_card.suit] != Card.suit_to_color[dragging_card.suit]
-                var has_lower_value = top_card.value == dragging_card.value + 1
+                var not_has_same_color = Card.suit_to_color[top_card.suit] != Card.suit_to_color[card.suit]
+                var has_lower_value = top_card.value == card.value + 1
                 if not_has_same_color && has_lower_value:
                     add_card_to_pile.call();
                     return true;
@@ -196,16 +211,16 @@ func stack_on_card(cards: Array[Card]):
 # 2. if we place the card on a pile, it must be a king (value 13)
 # 3. if we place a card on a foundation, it must be an ace (value 1)
 # returns true on succes, false otherwise
-func stack_on_pile(overlapping_piles: Array[Pile]):
+func stack_on_pile(overlapping_piles: Array[Pile], card: Card):
     for pile in overlapping_piles:
-        if pile.idx == dragging_card.pile_idx && pile.pile_type == get_card_pile(dragging_card).pile_type:
+        if pile.idx == card.pile_idx && pile.pile_type == get_card_pile(card).pile_type:
             continue;
         if !pile.cards.is_empty():
             continue
 
         var add_card_to_pile = func():
-            var current_pile = get_card_pile(dragging_card)
-            move_manager.move_card_between_piles(dragging_card, current_pile, pile, original_position)
+            var current_pile = get_card_pile(card)
+            move_manager.move_card_between_piles(card, current_pile, pile, original_position)
             return
         
         match pile.pile_type:
@@ -214,11 +229,11 @@ func stack_on_pile(overlapping_piles: Array[Pile]):
             Pile.PileType.Waste:
                 continue
             Pile.PileType.Foundation:
-                if dragging_card.value == 1:
+                if card.value == 1:
                     add_card_to_pile.call()
                     return true
             Pile.PileType.Pile:
-                if dragging_card.value == 13:
+                if card.value == 13:
                     add_card_to_pile.call()
                     return true
 
