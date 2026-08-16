@@ -1,23 +1,75 @@
 [gd_scene format=3 uid="uid://bbibfi0kfacm1"]
 
+[ext_resource type="Texture2D" uid="uid://rf5adcbigoo3" path="res://sprites/cards/spades/card_back.png" id="1_5mukb"]
+[ext_resource type="Script" uid="uid://cos85qhm6dw6b" path="res://screens/settings_screen.gd" id="1_opdw3"]
+
 [node name="SettingsScreen" type="Node2D" unique_id=2058420902]
+script = ExtResource("1_opdw3")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=568478388]
 offset_right = 320.0
 offset_bottom = 180.0
 color = Color(0, 0, 0, 0.2509804)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1672667515]
-offset_left = 166.0
-offset_top = 71.0
-offset_right = 206.0
-offset_bottom = 111.0
+[node name="OptionsContainer" type="GridContainer" parent="." unique_id=1068735080]
+offset_left = 9.0
+offset_top = 8.0
+offset_right = 230.0
+offset_bottom = 143.0
+columns = 2
 
-[node name="Resume" type="Button" parent="VBoxContainer" unique_id=1590361376]
+[node name="BackColorLabel" type="Label" parent="OptionsContainer" unique_id=1136910269]
 layout_mode = 2
+text = "Card Back Color"
 
-[node name="Restart" type="Button" parent="VBoxContainer" unique_id=1682465766]
+[node name="BackColorSelect" type="OptionButton" parent="OptionsContainer" unique_id=717497534]
 layout_mode = 2
+selected = 0
+item_count = 5
+popup/item_0/text = "Red"
+popup/item_0/id = 0
+popup/item_1/text = "Blue"
+popup/item_1/id = 1
+popup/item_2/text = "Green"
+popup/item_2/id = 2
+popup/item_3/text = "Yellow"
+popup/item_3/id = 3
+popup/item_4/text = "Purple"
+popup/item_4/id = 4
 
-[node name="Return" type="Button" parent="VBoxContainer" unique_id=2084707809]
+[node name="TurnStyleLabel" type="Label" parent="OptionsContainer" unique_id=609398877]
 layout_mode = 2
+text = "Turn Style"
+
+[node name="TurnStyleSelect" type="OptionButton" parent="OptionsContainer" unique_id=1866726927]
+layout_mode = 2
+selected = 0
+item_count = 2
+popup/item_0/text = "3"
+popup/item_0/id = 0
+popup/item_1/text = "1"
+popup/item_1/id = 1
+
+[node name="BackSprite" type="Sprite2D" parent="." unique_id=1819216918]
+position = Vector2(275, 39)
+texture = ExtResource("1_5mukb")
+hframes = 5
+
+[node name="Bottom" type="HBoxContainer" parent="." unique_id=1064398463]
+offset_top = 143.0
+offset_right = 320.0
+offset_bottom = 180.0
+alignment = 1
+
+[node name="Return" type="Button" parent="Bottom" unique_id=1299212051]
+layout_mode = 2
+text = "Return"
+
+[node name="Save" type="Button" parent="Bottom" unique_id=700273477]
+layout_mode = 2
+text = "Save"
+
+[connection signal="item_selected" from="OptionsContainer/BackColorSelect" to="." method="_on_color_change"]
+[connection signal="item_selected" from="OptionsContainer/TurnStyleSelect" to="." method="_on_turn_style_change"]
+[connection signal="pressed" from="Bottom/Return" to="." method="_on_return"]
+[connection signal="pressed" from="Bottom/Save" to="." method="_on_save"]
