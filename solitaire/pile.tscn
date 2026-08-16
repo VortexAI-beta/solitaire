@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cxdbuyruk6wd7"]
 
-[ext_resource type="Script" uid="uid://bfckpkqg5pr4o" path="res://pile.gd" id="1_rnvat"]
+[ext_resource type="Script" uid="uid://bfckpkqg5pr4o" path="res://solitaire/pile.gd" id="1_rnvat"]
 [ext_resource type="Texture2D" uid="uid://bcd0u38v42hst" path="res://sprites/cards/spades/card_holder.png" id="2_1o32j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1o32j"]

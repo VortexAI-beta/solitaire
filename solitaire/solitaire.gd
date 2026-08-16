@@ -1,8 +1,8 @@
 extends Node2D
 
-var card_scene = preload("res://card.tscn")
-var pile_scene = preload("res://pile.tscn")
-var move_manager_scene = preload("res://move_manager.tscn")
+var card_scene = preload("res://card/card.tscn")
+var pile_scene = preload("res://solitaire/pile.tscn")
+var move_manager_scene = preload("res://solitaire/move_manager.tscn")
 
 const card_width = 30
 const card_length = 40
@@ -17,6 +17,7 @@ var original_pile_index: int = -1;
 var original_pile_location: int = -1;
 var prev_mouse_position: Vector2 = Vector2(0,0)
 var card_tween = null;
+var move_manager: MoveManager
 
 # Where the aces are stored
 @export var piles: Array[Pile] = []
@@ -24,7 +25,6 @@ var card_tween = null;
 @export var deck: Pile;
 @export var waste: Pile;
 
-@onready var move_manager: MoveManager = move_manager_scene.instantiate()
 
 func constructDeck():
     var cards: Array[Card] = [] 
@@ -42,6 +42,11 @@ func constructDeck():
 
     for card in cards:
         deck.add_stack(card);
+
+func configureMoveManager():
+    move_manager = move_manager_scene.instantiate()
+    move_manager.deck = deck
+    move_manager.waste = waste
 
 func shuffle_and_deal():    
     ## draw cards from the deck and add them to piles
@@ -67,6 +72,7 @@ func _ready() -> void:
     get_viewport().physics_object_picking_first_only = true
     get_viewport().physics_object_picking_sort = true
     constructDeck()
+    configureMoveManager()
     configure_piles()
     shuffle_and_deal()
 

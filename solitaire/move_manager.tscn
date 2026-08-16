@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://df771v8nup2st"]
+
+[ext_resource type="Script" uid="uid://mkxmyr5dpvo" path="res://solitaire/move_manager.gd" id="1_snsac"]
+
+[node name="MoveManager" type="Node" unique_id=1411783430]
+script = ExtResource("1_snsac")
