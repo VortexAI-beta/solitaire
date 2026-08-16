@@ -276,6 +276,14 @@ func _on_deck_area_click(_viewport: Node, event: InputEvent, _shape_idx: int) ->
         if event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
             move_manager.return_waste_to_deck()
 
+func check_win():
+    var is_win: bool = foundations.all(func(pile): return pile.cards.size() == 13)
+    if is_win:
+        win()
+
+func win():
+    get_tree().paused = true;
+
 #Debug
 func _print_card(card: Card):
     print('card suit: ', _suit_to_string(card.suit), ' value: ', card.value)
@@ -291,14 +299,6 @@ func _suit_to_string(suit: Card.Suits):
         return 'Diamond'
     else:
         return 'Unknown'
-
-func check_win():
-    var is_win: bool = foundations.all(func(pile): return pile.cards.size() == 13)
-    if is_win:
-        win()
-
-func win():
-    get_tree().paused = true;
 
 
 func _on_undo_button_down() -> void:
