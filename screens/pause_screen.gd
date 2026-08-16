@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-var start_screen_scene = preload("res://screens/start_screen.tscn")
+var start_screen_path = "res://screens/start_screen.tscn"
 var solitaire_scene = preload("res://solitaire/solitaire.tscn")
 
 func _on_resume():
@@ -14,5 +14,5 @@ func _on_restart():
 
 func _on_return():
     get_tree().paused = false;
-    get_tree().change_scene_to_packed(start_screen_scene)
+    get_tree().change_scene_to_file(start_screen_path)
     self.queue_free()
