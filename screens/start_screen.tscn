@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://bjucu4io0mexd"]
+
+[ext_resource type="Script" uid="uid://c6kla4k1ixlaa" path="res://screens/start_screen.gd" id="1_jhthi"]
+
+[node name="StartScreen" type="Node2D" unique_id=2061026827]
+script = ExtResource("1_jhthi")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1234617141]
+offset_left = 86.0
+offset_top = 60.0
+offset_right = 198.0
+offset_bottom = 126.0
+
+[node name="start_solitaire" type="Button" parent="VBoxContainer" unique_id=566609726]
+layout_mode = 2
+text = "start solitaire"
+
+[node name="settings" type="Button" parent="VBoxContainer" unique_id=171395549]
+layout_mode = 2
+text = "settings"
+
+[connection signal="pressed" from="VBoxContainer/start_solitaire" to="." method="_on_start_solitaire"]

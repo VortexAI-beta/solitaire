@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://bbibfi0kfacm1"]
+
+[node name="SettingsScreen" type="Node2D" unique_id=2058420902]
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=568478388]
+offset_right = 320.0
+offset_bottom = 180.0
+color = Color(0, 0, 0, 0.2509804)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1672667515]
+offset_left = 166.0
+offset_top = 71.0
+offset_right = 206.0
+offset_bottom = 111.0
+
+[node name="Resume" type="Button" parent="VBoxContainer" unique_id=1590361376]
+layout_mode = 2
+
+[node name="Restart" type="Button" parent="VBoxContainer" unique_id=1682465766]
+layout_mode = 2
+
+[node name="Return" type="Button" parent="VBoxContainer" unique_id=2084707809]
+layout_mode = 2

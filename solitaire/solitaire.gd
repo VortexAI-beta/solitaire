@@ -3,6 +3,7 @@ extends Node2D
 var card_scene = preload("res://card/card.tscn")
 var pile_scene = preload("res://solitaire/pile.tscn")
 var move_manager_scene = preload("res://solitaire/move_manager.tscn")
+var pause_scene = preload("res://screens/pause_screen.tscn")
 
 const card_width = 30
 const card_length = 40
@@ -320,4 +321,6 @@ func _input(event: InputEvent) -> void:
             move_manager.redo()
 
         if event.keycode == KEY_ESCAPE:
-            get_tree().paused = !get_tree().paused;
+            get_tree().paused = true;
+            var pause = pause_scene.instantiate()
+            add_sibling(pause)

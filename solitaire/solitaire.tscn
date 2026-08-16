@@ -13,7 +13,7 @@ atlas = ExtResource("3_q1xbb")
 region = Rect2(171.43585, 70.15669, 32, 32)
 
 [node name="Solitaire" type="Node2D" unique_id=1306985394 node_paths=PackedStringArray("piles", "foundations", "deck", "waste")]
-process_mode = 3
+process_mode = 1
 script = ExtResource("1_gb76k")
 piles = [NodePath("Pausible/Pile1"), NodePath("Pausible/Pile2"), NodePath("Pausible/Pile3"), NodePath("Pausible/Pile4"), NodePath("Pausible/Pile5"), NodePath("Pausible/Pile6"), NodePath("Pausible/Pile7")]
 foundations = [NodePath("Pausible/Foundation1"), NodePath("Pausible/Foundation2"), NodePath("Pausible/Foundation3"), NodePath("Pausible/Foundation4")]
@@ -25,81 +25,76 @@ process_mode = 1
 
 [node name="ColorRect" type="ColorRect" parent="Pausible" unique_id=1373043874]
 z_index = -1
-offset_left = -160.0
-offset_top = -41.0
-offset_right = 160.0
-offset_bottom = 139.0
+offset_right = 320.0
+offset_bottom = 180.0
 mouse_filter = 2
 color = Color(0.27450982, 0.69411767, 0.27450982, 1)
 metadata/_edit_use_anchors_ = true
 
 [node name="Pile1" parent="Pausible" unique_id=449154856 instance=ExtResource("2_0skv7")]
-position = Vector2(-37, 26)
+position = Vector2(123, 67)
 pile_type = 3
 
 [node name="Pile2" parent="Pausible" unique_id=621144000 instance=ExtResource("2_0skv7")]
-position = Vector2(-7, 26)
+position = Vector2(153, 67)
 pile_type = 3
 
 [node name="Pile3" parent="Pausible" unique_id=1698983752 instance=ExtResource("2_0skv7")]
-position = Vector2(23, 26)
+position = Vector2(183, 67)
 pile_type = 3
 
 [node name="Pile4" parent="Pausible" unique_id=401473541 instance=ExtResource("2_0skv7")]
-position = Vector2(53, 26)
+position = Vector2(213, 67)
 pile_type = 3
 
 [node name="Pile5" parent="Pausible" unique_id=951238760 instance=ExtResource("2_0skv7")]
-position = Vector2(83, 26)
+position = Vector2(243, 67)
 pile_type = 3
 
 [node name="Pile6" parent="Pausible" unique_id=1713340507 instance=ExtResource("2_0skv7")]
-position = Vector2(113, 26)
+position = Vector2(273, 67)
 pile_type = 3
 
 [node name="Pile7" parent="Pausible" unique_id=1338106202 instance=ExtResource("2_0skv7")]
-position = Vector2(143, 26)
+position = Vector2(303, 67)
 pile_type = 3
 
 [node name="Deck" parent="Pausible" unique_id=1785519486 instance=ExtResource("2_0skv7")]
-position = Vector2(-37, -17)
+position = Vector2(123, 24)
 
 [node name="Waste" parent="Pausible" unique_id=1160802516 instance=ExtResource("2_0skv7")]
-position = Vector2(-7, -17)
+position = Vector2(153, 24)
 pile_type = 1
 
 [node name="Foundation1" parent="Pausible" unique_id=265128353 instance=ExtResource("2_0skv7")]
-position = Vector2(53, -17)
+position = Vector2(213, 24)
 pile_type = 2
 
 [node name="Foundation2" parent="Pausible" unique_id=679343372 instance=ExtResource("2_0skv7")]
-position = Vector2(83, -17)
+position = Vector2(243, 24)
 pile_type = 2
 
 [node name="Foundation3" parent="Pausible" unique_id=2130643927 instance=ExtResource("2_0skv7")]
-position = Vector2(113, -17)
+position = Vector2(273, 24)
 pile_type = 2
 
 [node name="Foundation4" parent="Pausible" unique_id=1289565008 instance=ExtResource("2_0skv7")]
-position = Vector2(143, -17)
+position = Vector2(303, 24)
 pile_type = 2
 
-[node name="Camera2D" type="Camera2D" parent="Pausible" unique_id=1164756226]
-position = Vector2(0, 49)
-
 [node name="undo" type="TextureButton" parent="Pausible" unique_id=976149719]
-offset_left = -151.0
-offset_top = -34.0
-offset_right = -119.0
-offset_bottom = -2.0
+offset_left = 9.0
+offset_top = 7.0
+offset_right = 41.0
+offset_bottom = 39.0
 texture_normal = SubResource("AtlasTexture_4fcuk")
 metadata/_edit_use_anchors_ = true
 
 [node name="redo" type="TextureButton" parent="Pausible" unique_id=1815349247]
-offset_left = -119.0
-offset_top = -34.0
-offset_right = -87.0
-offset_bottom = -2.0
+offset_left = 41.0
+offset_top = 7.0
+offset_right = 73.0
+offset_bottom = 39.0
 texture_normal = SubResource("AtlasTexture_2kmht")
 metadata/_edit_use_anchors_ = true
 
