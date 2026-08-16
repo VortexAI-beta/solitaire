@@ -19,6 +19,7 @@ var original_pile_location: int = -1;
 var prev_mouse_position: Vector2 = Vector2(0,0)
 var card_tween = null;
 var move_manager: MoveManager
+var config = ConfigFile.new()
 
 # Where the aces are stored
 @export var piles: Array[Pile] = []
@@ -32,7 +33,8 @@ func constructDeck():
     for i in range(1, 14):
         for suit in Card.Suits.values():
             var card: Card = card_scene.instantiate();
-            card.initialize(suit , i);
+            var back_frame = config.get_value("card", "back_color", 0)
+            card.initialize(suit , i, back_frame);
             # card.initialize(suit / 2, i%3 +1);
             card.card_clicked.connect(on_card_clicked)
             card.card_double_clicked.connect(on_card_double_clicked)
@@ -70,6 +72,7 @@ func configure_piles():
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
     # ensure that if multiple cards a clicked, only the top one will be used for draggin.
+    config.load("user://config.ini")
     get_viewport().physics_object_picking_first_only = true
     get_viewport().physics_object_picking_sort = true
     constructDeck()
