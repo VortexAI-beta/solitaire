@@ -4,6 +4,7 @@ var card_scene = preload("res://card/card.tscn")
 var pile_scene = preload("res://solitaire/pile.tscn")
 var move_manager_scene = preload("res://solitaire/move_manager.tscn")
 var pause_scene = preload("res://screens/pause_screen.tscn")
+var win_scene = preload("res://screens/win_screen.tscn")
 
 const card_width = 30
 const card_length = 40
@@ -106,6 +107,7 @@ func on_card_double_clicked(card: Card, event: InputEventMouseButton):
             stack_on_card([top_card], card)
     else:
         on_card_clicked(card, event)
+    check_win()
 
 func start_drag(card: Card):
     if !card.face_up:
@@ -175,6 +177,7 @@ func on_card_released():
 
         card_tween.tween_property(dragging_card, 'rotation_degrees', 0, 0.1)
         dragging_card = null
+    check_win()
 
 
 # When a card is stacked on top a another card, it must satisfy the following requirements:
@@ -286,6 +289,8 @@ func check_win():
 
 func win():
     get_tree().paused = true;
+    var win_screen = win_scene.instantiate();
+    add_sibling(win_screen)
 
 #Debug
 func _print_card(card: Card):

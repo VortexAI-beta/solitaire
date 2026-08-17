@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://dg0iamvmrrr1u"]
+
+[ext_resource type="Script" uid="uid://dj5axqre2ryts" path="res://screens/win_screen.gd" id="1_gt3jw"]
+
+[node name="WinScreen" type="CanvasLayer" unique_id=733518940]
+process_mode = 3
+script = ExtResource("1_gt3jw")
+metadata/_edit_vertical_guides_ = [160.0]
+
+[node name="YOU WIN" type="Label" parent="." unique_id=403281964]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.5
+offset_top = -54.5
+offset_right = 35.5
+offset_bottom = -31.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "YOU WIN"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1583868240]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -93.0
+offset_top = -15.5
+offset_right = 93.0
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Restart" type="Button" parent="HBoxContainer" unique_id=990495466]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Restart"
+
+[node name="Return" type="Button" parent="HBoxContainer" unique_id=1629280344]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "To Start
+"
+
+[connection signal="pressed" from="HBoxContainer/Restart" to="." method="_on_restart"]
+[connection signal="pressed" from="HBoxContainer/Return" to="." method="_on_return"]
