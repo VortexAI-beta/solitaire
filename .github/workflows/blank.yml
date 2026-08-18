@@ -32,15 +32,7 @@ jobs:
           relative_project_path: ./
           use_preset_export_path: true
           archive_output: false
-
-      - name: create release
-        uses: ncipollo/release-action@v1.18.0
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          generateReleaseNotes: true
-          tag: ${{ github.ref_name }}
-          artifacts: ${{ steps.export.outputs.build_directory }}/*
-
+        
       - name: deploy to itch.io
         uses: yeslayla/butler-publish-itchio-action@master
         env:
@@ -49,6 +41,27 @@ jobs:
           ITCH_GAME: first-project-solitaire
           ITCH_USER: VortexAI
           PACKAGE: ${{ steps.export.outputs.build_directory }}/Windows Desktop
+                                                                                                            
+      - name: Package Windows Build for Release                                                                                                               
+        run: |                                                                                                                                                
+          cd "${{ steps.export.outputs.build_directory }}/Windows Desktop"                                                                                    
+          zip -r "${{ github.workspace }}/solitaire-windows.zip" .                                                                                            
+                                                                                                                                                                  
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: solitaire-windows.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # - name: create release
+      #   uses: ncipollo/release-action@v1.18.0
+      #   with:
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #     generateReleaseNotes: true
+      #     tag: ${{ github.ref_name }}
+      #     artifacts: ${{ steps.export.outputs.build_directory }}/*
+
 
       # - name: Deploy to Itch.io (Butler)
       #   uses: ManleyDev/butler-publish-itchio-action@v2.3.0
