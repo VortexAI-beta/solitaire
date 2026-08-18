@@ -40,6 +40,11 @@ jobs:
           tag: ${{ github.ref_name }}
           artifacts: ${{ steps.export.outputs.archive_directory }}/*
 
+      - name: Copy build to workspace
+        run: |
+          mkdir -p builds
+          cp ${{ steps.export.outputs.archive_directory }}/windows_desktop.zip builds/
+
       - name: deploy to itch.io
         uses: yeslayla/butler-publish-itchio-action@master
         env:
@@ -47,7 +52,7 @@ jobs:
           CHANNEL: windows
           ITCH_GAME: first-project-solitaire
           ITCH_USER: VortexAI
-          PACKAGE: ${{ steps.export.outputs.archive_directory }}/windows_desktop.zip
+          PACKAGE: builds/windows_desktop.zip
 
       # - name: Deploy to Itch.io (Butler)
       #   uses: ManleyDev/butler-publish-itchio-action@v2.3.0
