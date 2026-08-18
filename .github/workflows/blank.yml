@@ -30,9 +30,16 @@ jobs:
           godot_executable_download_url: https://github.com/godotengine/godot/releases/download/${{ env.GODOT_VERSION }}-stable/Godot_v${{ env.GODOT_VERSION }}-stable_linux.x86_64.zip
           godot_export_templates_download_url: https://github.com/godotengine/godot/releases/download/${{ env.GODOT_VERSION }}-stable/Godot_v${{ env.GODOT_VERSION }}-stable_export_templates.tpz
           relative_project_path: ./
-          relative_export_path: build
-          archive_output: false
-        
+          archive_output: true
+
+      - name: create release
+        uses: ncipollo/release-action@v1.18.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          generateReleaseNotes: true
+          tag: ${{ github.ref_name }}
+          artifacts: ${{ steps.export.outputs.archive_directory }}/*
+
       - name: deploy to itch.io
         uses: yeslayla/butler-publish-itchio-action@master
         env:
@@ -40,28 +47,7 @@ jobs:
           CHANNEL: windows
           ITCH_GAME: first-project-solitaire
           ITCH_USER: VortexAI
-          PACKAGE: build/Windows Desktop/solitaire.exe
-                                                                                                            
-      - name: Package Windows Build for Release                                                                                                               
-        run: |                                                                                                                                                
-          cd build/Windows Desktop"                                                                                    
-          zip -r "${{ github.workspace }}/solitaire-windows.zip" .                                                                                            
-                                                                                                                                                                  
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
-        with:
-          files: solitaire-windows.zip
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      # - name: create release
-      #   uses: ncipollo/release-action@v1.18.0
-      #   with:
-      #     token: ${{ secrets.GITHUB_TOKEN }}
-      #     generateReleaseNotes: true
-      #     tag: ${{ github.ref_name }}
-      #     artifacts: ${{ steps.export.outputs.build_directory }}/*
-
+          PACKAGE: ${{ steps.export.outputs.archive_directory }}/Windows Desktop.zip
 
       # - name: Deploy to Itch.io (Butler)
       #   uses: ManleyDev/butler-publish-itchio-action@v2.3.0
