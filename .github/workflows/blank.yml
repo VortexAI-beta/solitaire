@@ -39,7 +39,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           generateReleaseNotes: true
           tag: ${{ github.ref_name }}
-          artifacts: ${{ steps.export.outputs.archive_directory }}/*
+          artifacts: ${{ steps.export.outputs.build_directory }}/*
 
       - name: deploy to itch.io
         uses: yeslayla/butler-publish-itchio-action@master
@@ -48,7 +48,7 @@ jobs:
           CHANNEL: windows
           ITCH_GAME: first-project-solitaire
           ITCH_USER: VortexAI
-          PACKAGE: ${{ steps.export.outputs.archive_directory }}/*
+          PACKAGE: ${{ steps.export.outputs.build_directory }}/Windows Desktop
 
       # - name: Deploy to Itch.io (Butler)
       #   uses: ManleyDev/butler-publish-itchio-action@v2.3.0
