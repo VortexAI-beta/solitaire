@@ -47,7 +47,7 @@ jobs:
           CHANNEL: windows
           ITCH_GAME: first-project-solitaire
           ITCH_USER: VortexAI
-          PACKAGE: build/windows
+          PACKAGE: ${{ steps.export.outputs.archive_directory }}/*
 
       # - name: Deploy to Itch.io (Butler)
       #   uses: ManleyDev/butler-publish-itchio-action@v2.3.0
