@@ -41,7 +41,7 @@ jobs:
           artifacts: ${{ steps.export.outputs.archive_directory }}/*
 
       - name: deploy to itch.io
-      - uses: yeslayla/butler-publish-itchio-action@master
+        uses: yeslayla/butler-publish-itchio-action@master
         env:
           BUTLER_CREDENTIALS: ${{ secrets.BUTLER_API_KEY }}
           CHANNEL: windows
