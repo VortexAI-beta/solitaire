@@ -24,6 +24,7 @@ jobs:
           lfs: true # Enable if using Git LFS for assets
 
       - name: Export Game (Godot CI)
+        id: export
         uses: firebelley/godot-export@v8.0.0
         with:
           godot_executable_download_url: https://github.com/godotengine/godot/releases/download/${{ env.GODOT_VERSION }}-stable/Godot_v${{ env.GODOT_VERSION }}-stable_linux.x86_64.zip
@@ -31,15 +32,13 @@ jobs:
           relative_project_path: ./
           archive_output: true
 
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v3
+      - name: create release
+        uses: ncipollo/release-action@v1.18.0
         with:
-          files: |
-            build/**
-          draft: false
-          prerelease: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          generateReleaseNotes: true
+          tag: ${{ github.ref_name }}
+          artifacts: ${{ steps.export.outputs.archive_directory }}/*
 
       # - name: Deploy to Itch.io (Butler)
       #   uses: ManleyDev/butler-publish-itchio-action@v2.3.0
