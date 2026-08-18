@@ -30,7 +30,7 @@ jobs:
           godot_executable_download_url: https://github.com/godotengine/godot/releases/download/${{ env.GODOT_VERSION }}-stable/Godot_v${{ env.GODOT_VERSION }}-stable_linux.x86_64.zip
           godot_export_templates_download_url: https://github.com/godotengine/godot/releases/download/${{ env.GODOT_VERSION }}-stable/Godot_v${{ env.GODOT_VERSION }}-stable_export_templates.tpz
           relative_project_path: ./
-          use_preset_export_path: true
+          relative_export_path: build
           archive_output: false
         
       - name: deploy to itch.io
@@ -40,11 +40,11 @@ jobs:
           CHANNEL: windows
           ITCH_GAME: first-project-solitaire
           ITCH_USER: VortexAI
-          PACKAGE: ${{ steps.export.outputs.build_directory }}/Windows Desktop
+          PACKAGE: build/Windows Desktop/solitaire.exe
                                                                                                             
       - name: Package Windows Build for Release                                                                                                               
         run: |                                                                                                                                                
-          cd "${{ steps.export.outputs.build_directory }}/Windows Desktop"                                                                                    
+          cd build/Windows Desktop"                                                                                    
           zip -r "${{ github.workspace }}/solitaire-windows.zip" .                                                                                            
                                                                                                                                                                   
       - name: Create GitHub Release
