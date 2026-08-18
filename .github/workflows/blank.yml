@@ -40,6 +40,15 @@ jobs:
           tag: ${{ github.ref_name }}
           artifacts: ${{ steps.export.outputs.archive_directory }}/*
 
+      - name: deploy to itch.io
+      - uses: yeslayla/butler-publish-itchio-action@master
+        env:
+          BUTLER_CREDENTIALS: ${{ secrets.BUTLER_API_KEY }}
+          CHANNEL: windows
+          ITCH_GAME: first-project-solitaire
+          ITCH_USER: VortexAI
+          PACKAGE: build/windows
+
       # - name: Deploy to Itch.io (Butler)
       #   uses: ManleyDev/butler-publish-itchio-action@v2.3.0
       #   env:
