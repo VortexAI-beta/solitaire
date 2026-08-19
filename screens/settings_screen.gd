@@ -25,12 +25,10 @@ func _ready() -> void:
 func _on_color_change(index: int):
     back_sprite.frame = index
     config.set_value("card", "back_color", index)
+    config.save("user://config.ini")
 
 func _on_turn_style_change(index: int):
-    config.set_value("game", "turn_style", index)
-
-func _on_save():
-    print('save')
+    config.set_value("game", "turn_style", Constants.turn_id_to_num[index])
     config.save("user://config.ini")
 
 func _on_return():

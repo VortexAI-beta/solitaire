@@ -5,6 +5,7 @@ class_name MoveManager
 @export var waste: Pile
 @export var deck: Pile
 
+var config = ConfigFile.new()
 var undo_redo = UndoRedo.new()
 
 func move_card_between_piles(card: Card, from_pile: Pile, to_pile: Pile, old_position: Vector2 = Vector2(0, 0)):
@@ -35,8 +36,9 @@ func draw_from_deck():
         var pos = card.position
         undo_redo.add_do_property(card, 'position', Vector2.ZERO)
         undo_redo.add_undo_property(card, 'position', pos)
- 
-    var cards: Array[Card] = deck.cards.slice(max(0,deck.cards.size()-3),  deck.cards.size());
+
+    var pull_num = config.get_value('game', 'turn_style')
+    var cards: Array[Card] = deck.cards.slice(max(0,deck.cards.size()-pull_num),  deck.cards.size());
     
     # needs to be registered in this card order, otherwise the scene tree will not be setup properly
     for card in cards: 
@@ -87,3 +89,6 @@ func undo():
 
 func redo():
     undo_redo.redo()
+
+func _init() -> void:
+    config.load("user://config.ini")

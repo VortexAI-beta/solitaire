@@ -7,6 +7,11 @@ process_mode = 3
 script = ExtResource("1_gt3jw")
 metadata/_edit_vertical_guides_ = [160.0]
 
+[node name="ColorRect" type="ColorRect" parent="." unique_id=859458765]
+offset_right = 320.0
+offset_bottom = 180.0
+color = Color(0, 0, 0, 0.24705882)
+
 [node name="YOU WIN" type="Label" parent="." unique_id=403281964]
 anchors_preset = 8
 anchor_left = 0.5

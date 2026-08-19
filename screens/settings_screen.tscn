@@ -65,11 +65,6 @@ alignment = 1
 layout_mode = 2
 text = "Return"
 
-[node name="Save" type="Button" parent="Bottom" unique_id=700273477]
-layout_mode = 2
-text = "Save"
-
 [connection signal="item_selected" from="OptionsContainer/BackColorSelect" to="." method="_on_color_change"]
 [connection signal="item_selected" from="OptionsContainer/TurnStyleSelect" to="." method="_on_turn_style_change"]
 [connection signal="pressed" from="Bottom/Return" to="." method="_on_return"]
-[connection signal="pressed" from="Bottom/Save" to="." method="_on_save"]
