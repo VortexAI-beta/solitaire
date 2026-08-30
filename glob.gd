@@ -8,3 +8,5 @@ const turn_id_to_num = {
     0: 3,
     1: 1,
 }
+
+const user_config_path = "user://config.ini"

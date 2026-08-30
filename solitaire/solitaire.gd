@@ -290,7 +290,8 @@ func check_win():
 func win():
     get_tree().paused = true;
     var win_screen = win_scene.instantiate();
-    add_sibling(win_screen)
+    var canvas = $PauseOverlay
+    canvas.add(win_screen)
 
 #Debug
 func _print_card(card: Card):
@@ -331,4 +332,5 @@ func _input(event: InputEvent) -> void:
         if event.keycode == KEY_ESCAPE:
             get_tree().paused = true;
             var pause = pause_scene.instantiate()
-            add_sibling(pause)
+            var overlay = $PauseOverlay
+            overlay.add_child(pause)

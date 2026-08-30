@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 var start_screen_path = "res://screens/start_screen.tscn"
 var config = ConfigFile.new()

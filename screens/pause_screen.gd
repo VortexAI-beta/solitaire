@@ -1,4 +1,4 @@
-extends CanvasLayer
+extends Control
 
 var start_screen_path = "res://screens/start_screen.tscn"
 var solitaire_scene = preload("res://solitaire/solitaire.tscn")

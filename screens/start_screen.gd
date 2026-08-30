@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 var solitaire_scene = preload("res://solitaire/solitaire.tscn")
 var settings_scene = preload("res://screens/settings_screen.tscn")

@@ -1,4 +1,4 @@
-extends CanvasLayer
+extends Control
 
 var start_scene_path = "res://screens/pause_screen.tscn"
 var solitarie_scene_path = "res://solitaire/solitaire.tscn"

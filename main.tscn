@@ -7,3 +7,12 @@ process_mode = 3
 metadata/_edit_vertical_guides_ = [160.0]
 
 [node name="StartScreen" parent="." unique_id=2061026827 instance=ExtResource("1_ig7tw")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 160.0
+offset_top = 90.0
+offset_right = 160.0
+offset_bottom = 90.0
