@@ -1,9 +1,11 @@
 [gd_scene format=3 uid="uid://rg8k6xv7iq2r"]
 
+[ext_resource type="Script" uid="uid://bl0iisnt6oa2c" path="res://main.gd" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://bjucu4io0mexd" path="res://screens/start_screen.tscn" id="1_ig7tw"]
 
 [node name="Main" type="Node2D" unique_id=420920781]
 process_mode = 3
+script = ExtResource("1_0xm2m")
 metadata/_edit_vertical_guides_ = [160.0]
 
 [node name="StartScreen" parent="." unique_id=2061026827 instance=ExtResource("1_ig7tw")]
