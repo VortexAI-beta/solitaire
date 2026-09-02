@@ -28,6 +28,7 @@ texture_margin_bottom = 6.0
 region_rect = Rect2(96, 64, 32, 32)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2kni4"]
+texture = ExtResource("1_jjpe7")
 texture_margin_left = 6.0
 texture_margin_top = 6.0
 texture_margin_right = 6.0
@@ -35,6 +36,7 @@ texture_margin_bottom = 6.0
 region_rect = Rect2(32, 32, 32, 32)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_k2yff"]
+texture = ExtResource("1_jjpe7")
 texture_margin_left = 6.0
 texture_margin_top = 6.0
 texture_margin_right = 6.0
@@ -42,6 +44,7 @@ texture_margin_bottom = 6.0
 region_rect = Rect2(32, 0, 32, 32)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_x6ffq"]
+texture = ExtResource("1_jjpe7")
 texture_margin_left = 6.0
 texture_margin_top = 6.0
 texture_margin_right = 6.0
@@ -49,6 +52,7 @@ texture_margin_bottom = 6.0
 region_rect = Rect2(32, 64, 32, 32)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_58ebi"]
+texture = ExtResource("1_jjpe7")
 texture_margin_left = 6.0
 texture_margin_top = 6.0
 texture_margin_right = 6.0
@@ -56,6 +60,7 @@ texture_margin_bottom = 6.0
 region_rect = Rect2(64, 32, 32, 32)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1y3w0"]
+texture = ExtResource("1_jjpe7")
 texture_margin_left = 6.0
 texture_margin_top = 6.0
 texture_margin_right = 6.0
@@ -63,6 +68,7 @@ texture_margin_bottom = 6.0
 region_rect = Rect2(64, 0, 32, 32)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_q4ter"]
+texture = ExtResource("1_jjpe7")
 texture_margin_left = 6.0
 texture_margin_top = 6.0
 texture_margin_right = 6.0
@@ -70,6 +76,7 @@ texture_margin_bottom = 6.0
 region_rect = Rect2(64, 64, 32, 32)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_22sbv"]
+texture = ExtResource("1_jjpe7")
 texture_margin_left = 6.0
 texture_margin_top = 6.0
 texture_margin_right = 6.0
@@ -77,6 +84,7 @@ texture_margin_bottom = 6.0
 region_rect = Rect2(0, 32, 32, 32)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jjpe7"]
+texture = ExtResource("1_jjpe7")
 texture_margin_left = 6.0
 texture_margin_top = 6.0
 texture_margin_right = 6.0
@@ -84,6 +92,7 @@ texture_margin_bottom = 6.0
 region_rect = Rect2(0, 0, 32, 32)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5r51a"]
+texture = ExtResource("1_jjpe7")
 texture_margin_left = 6.0
 texture_margin_top = 6.0
 texture_margin_right = 6.0
