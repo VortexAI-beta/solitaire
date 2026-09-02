@@ -291,7 +291,7 @@ func win():
     get_tree().paused = true;
     var win_screen = win_scene.instantiate();
     var canvas = $PauseOverlay
-    canvas.add(win_screen)
+    canvas.add_child(win_screen)
 
 #Debug
 func _print_card(card: Card):
