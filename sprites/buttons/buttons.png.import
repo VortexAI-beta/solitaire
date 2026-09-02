@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://durie8366urrq"
-path="res://.godot/imported/button_red.png-5a7597c6044844b23543f84b17b3b033.ctex"
+uid="uid://gw04jaf4w0k4"
+path="res://.godot/imported/buttons.png-4c07fbb5a1d6e1cea15d4bbca1a18e75.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/cards/spades/button_red.png"
-dest_files=["res://.godot/imported/button_red.png-5a7597c6044844b23543f84b17b3b033.ctex"]
+source_file="res://sprites/buttons/buttons.png"
+dest_files=["res://.godot/imported/buttons.png-4c07fbb5a1d6e1cea15d4bbca1a18e75.ctex"]
 
 [params]
 
