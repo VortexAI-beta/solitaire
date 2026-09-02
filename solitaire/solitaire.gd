@@ -96,6 +96,10 @@ func on_card_clicked(card: Card, event: InputEventMouseButton):
 
 func on_card_double_clicked(card: Card, event: InputEventMouseButton):
     if card.location == Pile.PileType.Pile || card.location == Pile.PileType.Waste:
+        # Only snap for the top card of the deck
+        if card.location == Pile.PileType.Waste && waste.cards[-1] != card:
+            return
+
         if card.value == 1:
             var empty_piles: Array[Pile] = foundations.filter(func(pile): return pile.cards.is_empty())
             stack_on_pile(empty_piles, card)

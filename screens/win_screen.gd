@@ -1,6 +1,6 @@
 extends Control
 
-var start_scene_path = "res://screens/pause_screen.tscn"
+var start_scene_path = "res://screens/start_screen.tscn"
 var solitarie_scene_path = "res://solitaire/solitaire.tscn"
 
 func _on_restart():
