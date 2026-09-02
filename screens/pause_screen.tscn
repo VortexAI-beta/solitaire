@@ -65,5 +65,4 @@ text = "Back to Start"
 
 [connection signal="pressed" from="VBoxContainer/Resume" to="." method="_on_resume"]
 [connection signal="pressed" from="VBoxContainer/Restart" to="." method="_on_restart"]
-[connection signal="pressed" from="VBoxContainer/Restart" to="." method="_on_resume"]
 [connection signal="pressed" from="VBoxContainer/Return" to="." method="_on_return"]
