@@ -2,6 +2,15 @@
 
 [ext_resource type="Script" uid="uid://dj5axqre2ryts" path="res://screens/win_screen.gd" id="1_gt3jw"]
 [ext_resource type="Theme" uid="uid://dkoa754md27xe" path="res://button_theme.tres" id="1_louiv"]
+[ext_resource type="Shader" uid="uid://htmmj7spb8qw" path="res://shaders/control.gdshader" id="3_mby22"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_injda"]
+shader = ExtResource("3_mby22")
+shader_parameter/width = 10.0
+shader_parameter/angle = -30.0
+shader_parameter/offset = Vector2(500, 0)
+shader_parameter/duration = 2.0
+shader_parameter/speed = 800.0
 
 [node name="WinScreen" type="Control" unique_id=2017863149]
 process_mode = 3
@@ -25,6 +34,8 @@ grow_vertical = 2
 color = Color(0, 0, 0, 0.24705882)
 
 [node name="YOU WIN" type="Label" parent="." unique_id=403281964]
+visible = false
+material = SubResource("ShaderMaterial_injda")
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -32,11 +43,13 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -35.5
-offset_top = -54.5
+offset_top = -49.5
 offset_right = 35.5
-offset_bottom = -31.5
+offset_bottom = -26.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
 text = "YOU WIN"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -68,6 +81,68 @@ size_flags_horizontal = 3
 theme_type_variation = &"red_button"
 text = "TO START
 "
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="." unique_id=247516031]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -45.0
+offset_right = 20.0
+offset_bottom = -31.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="Y" type="Label" parent="HBoxContainer2" unique_id=876582483]
+material = SubResource("ShaderMaterial_injda")
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "Y"
+
+[node name="O" type="Label" parent="HBoxContainer2" unique_id=567924992]
+material = SubResource("ShaderMaterial_injda")
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "O"
+
+[node name="U" type="Label" parent="HBoxContainer2" unique_id=1268196865]
+material = SubResource("ShaderMaterial_injda")
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "U"
+
+[node name="_" type="Label" parent="HBoxContainer2" unique_id=1047912647]
+layout_mode = 2
+text = "  "
+
+[node name="W" type="Label" parent="HBoxContainer2" unique_id=1230970808]
+material = SubResource("ShaderMaterial_injda")
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "W"
+
+[node name="I" type="Label" parent="HBoxContainer2" unique_id=1166672916]
+material = SubResource("ShaderMaterial_injda")
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "I"
+
+[node name="N" type="Label" parent="HBoxContainer2" unique_id=2146168254]
+material = SubResource("ShaderMaterial_injda")
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "N"
 
 [connection signal="pressed" from="HBoxContainer/Restart" to="." method="_on_restart"]
 [connection signal="pressed" from="HBoxContainer/Return" to="." method="_on_return"]
